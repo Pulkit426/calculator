@@ -16,7 +16,9 @@ append(button.innerText)
 updateDisplay()
 }))
 
-dataAllClear.addEventListener('click', allClear)
+dataAllClear.addEventListener('click', () => { 
+    allClear()
+    updateDisplay()})
 
 function append(num){
     if(num === '.' && currentOperand.includes('.'))
@@ -32,7 +34,7 @@ function updateDisplay(){
 
 
 function allClear(){
-    previousOper = ''
+    previousOperand = ''
     currentOperand = ''
     operator = null
 }
