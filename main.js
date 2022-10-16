@@ -16,9 +16,15 @@ append(button.innerText)
 updateDisplay()
 }))
 
+operationButtons.forEach(button => button.addEventListener('click', () => {
+    choseOperation(button.innerText)
+    updateDisplay()
+}))
+
 dataAllClear.addEventListener('click', () => { 
     allClear()
-    updateDisplay()})
+    updateDisplay()
+})
 
 function append(num){
     if(num === '.' && currentOperand.includes('.'))
@@ -39,6 +45,18 @@ function allClear(){
     operator = null
 }
 
+function choseOperation(operation){
+    if(currentOperand === '')
+        return
+    
+    if(previousOperand!== '')
+        // compute()
+    
+        
+    operator= operation.toString()
+    previousOperand = currentOperand
+    currentOperand = ''
+}
 
 
 function add(a,b){
