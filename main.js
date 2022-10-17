@@ -61,6 +61,13 @@ function allClear(){
 }
 
 function choseOperation(operation){
+
+    if(currentOperand === '' && previousOperand!== '' && operator!=null)
+    { operator= operation.toString()
+        updateDisplay()
+        return
+    }
+
     if(currentOperand === '')
         return
     
