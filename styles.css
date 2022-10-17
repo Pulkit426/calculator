@@ -5,44 +5,95 @@ body{
 }
 
 .container{
-    width: 375px;
+    width: 300px;
     height: 500px;
     border: 3px solid black;
     border-radius: 5px;
     display: flex;
     flex-direction: column;
+    background-color: #212121;
 }
 
 .display-screen{
-    background-color: lightgray;
+    background-color: #eee;
     margin: 10px;
-    width: 355px;
+    width: 280px;
     height: 150px;
     display: flex;
     align-items: flex-end;
     justify-content: space-between;
     flex-direction: column;
+    border-radius: 0.75rem;
 }
 
 .display-screen>div{
     padding: 15px;
+}
+
+.display-screen .previous-operand{
+    color: green;
     font-size: 24px;
 }
 
+.display-screen .current-operand{
+    font-size: 30px;
+    font-weight: 700;
+    color: #0e7490;
+}
+
 .buttons{
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    height: 100%;
+    grid-gap: .5rem;
+    padding: 1rem;
+    background: #212121;
+    border-bottom-right-radius: 1rem;
+    border-bottom-left-radius: 1rem;
 }
 
 
 button{
-    height: 50px;
-    width: 75px;
+    font-size: 1.325rem;
+    padding: 1rem 0;
+    font-weight: 700;
+    background: #616161;
+    border: 0px solid transparent;
+    outline: none;
+    text-decoration: none;
+    border-radius: 100%;
+    box-shadow: 4px 5px 5px 0px rgba(0,0,0,0.5);
+    color: #DFDFDF;
+    cursor: pointer;
+    transition: all .12s ease-in;
 }
 
-.equals{
-    width: 160px;
+button.equals{
+    grid-column: 3/5;
+    border-radius: 2.5rem;
 }
+
+button.number:hover,
+button.decimal:hover{
+    background-color: #0e7490;
+    transform:translateY(-0.1rem);
+}
+
+button.operator:hover{
+    background-color: #FBAB7E;
+    background-image: linear-gradient(62deg, #FBAB7E 0%, #F7CE68 100%);
+    transform:translateY(-0.1rem);
+}
+
+button.equals:hover{
+    background-color: limegreen;
+    transform:translateY(-0.1rem);
+
+}
+
+button.all-clear:hover,
+button.delete:hover{
+    background-color: #f87171;
+    transform:translateY(-0.1rem);
+}
+
