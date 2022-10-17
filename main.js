@@ -128,8 +128,6 @@ function operate(a,b, choice){
 
 function handleKeyboardInput(e){
 
-    console.log(e.key)
-
     if( (e.key>=0 && e.key<=9) || (e.key==='.')){
         append(e.key)
     }
