@@ -19,10 +19,21 @@ updateDisplay()
 operationButtons.forEach(button => button.addEventListener('click', () => {
     choseOperation(button.innerText)
     updateDisplay()
+    currentOperandTextElement.innerText = previousOperand
 }))
 
 dataAllClear.addEventListener('click', () => { 
     allClear()
+    updateDisplay()
+})
+
+dataEquals.addEventListener('click', () => {
+    compute()
+    updateDisplay()
+})
+
+dataDelete.addEventListener('click', () => {
+    deleteDigit()
     updateDisplay()
 })
 
@@ -35,7 +46,11 @@ function append(num){
 
 function updateDisplay(){
     currentOperandTextElement.innerText = currentOperand
-    previousOperandTextElement.innerText = previousOperand
+
+    if(operator)
+    previousOperandTextElement.innerText = `${previousOperand} ${operator}`
+   else    
+    previousOperandTextElement.innerText = ''
 }
 
 
@@ -49,44 +64,55 @@ function choseOperation(operation){
     if(currentOperand === '')
         return
     
-    if(previousOperand!== '')
-        // compute()
+    if(previousOperand!== ''){
+        compute()
+    }
     
-        
+
     operator= operation.toString()
     previousOperand = currentOperand
     currentOperand = ''
+
 }
 
+function compute(){
+    let computation =  null
 
-function add(a,b){
-    return a+b
+    const prev= parseFloat(previousOperand)
+    const current = parseFloat(currentOperand)
+
+    if(isNaN(prev) || isNaN(current))
+    return 
+
+    computation = operate(prev,current, operator)
+
+
+    previousOperand = ''
+    currentOperand = computation
+    operator = undefined
 }
 
-function subtract(a,b){
-    return a-b
-}
-
-function multiply(a,b){
-    return a*b
-}
-
-function divide(a,b){
-    return a/b
+function deleteDigit(){
+currentOperand  = currentOperand.toString().slice(0,-1)
 }
 
 function operate(a,b, choice){
     switch(choice){
-        case "+": return add(a,b)
+        case "+": return a+b
                     break
         
-        case "-": return subtract(a,b)
+        case "-": return a-b
                   break
         
-        case "*": return multiply(a,b)
+        case "x": return a*b
                   break
 
-        case "/": return divide(a,b)
+        case "÷": return a/b
                   break
+
+        case "%": return a%b
+                  break
+        
+        default: return
     }
 }
