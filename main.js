@@ -13,35 +13,34 @@ var operator = null
 
 numberButtons.forEach(button => button.addEventListener('click', () => {
 append(button.innerText)
-updateDisplay()
 }))
 
 operationButtons.forEach(button => button.addEventListener('click', () => {
     choseOperation(button.innerText)
-    updateDisplay()
     currentOperandTextElement.innerText = previousOperand
 }))
 
 dataAllClear.addEventListener('click', () => { 
     allClear()
-    updateDisplay()
 })
 
 dataEquals.addEventListener('click', () => {
     compute()
-    updateDisplay()
 })
 
 dataDelete.addEventListener('click', () => {
     deleteDigit()
-    updateDisplay()
 })
+
+window.addEventListener('keydown', handleKeyboardInput)
+
 
 function append(num){
     if(num === '.' && currentOperand.includes('.'))
     return 
 
     currentOperand = currentOperand.toString() + num.toString()
+    updateDisplay()
 }
 
 function updateDisplay(){
@@ -58,6 +57,7 @@ function allClear(){
     previousOperand = ''
     currentOperand = ''
     operator = null
+    updateDisplay()
 }
 
 function choseOperation(operation){
@@ -72,7 +72,7 @@ function choseOperation(operation){
     operator= operation.toString()
     previousOperand = currentOperand
     currentOperand = ''
-
+    updateDisplay()
 }
 
 function compute(){
@@ -90,10 +90,12 @@ function compute(){
     previousOperand = ''
     currentOperand = computation
     operator = undefined
+    updateDisplay()
 }
 
 function deleteDigit(){
 currentOperand  = currentOperand.toString().slice(0,-1)
+updateDisplay()
 }
 
 function operate(a,b, choice){
@@ -115,4 +117,41 @@ function operate(a,b, choice){
         
         default: return
     }
+}
+
+function handleKeyboardInput(e){
+
+    console.log(e.key)
+
+    if( (e.key>=0 && e.key<=9) || (e.key==='.')){
+        append(e.key)
+    }
+
+    else if(e.key==='+' || e.key==='-' || e.key==='%'){
+        choseOperation(e.key)
+        currentOperandTextElement.innerText = previousOperand
+    }
+        
+    else if(e.key==='x' || e.key==='*'){
+        choseOperation('x')
+        currentOperandTextElement.innerText = previousOperand
+    }
+
+    else if(e.key==='/' || e.key==='÷'){
+        choseOperation('÷')
+        currentOperandTextElement.innerText = previousOperand
+    }
+
+    else if(e.key==='=' || e.key==='Enter'){
+        compute()
+    }
+
+    else if(e.key==='Backspace'){
+        deleteDigit()
+    }
+
+    else if(e.key==='Escape'){
+        allClear()
+    }
+
 }
